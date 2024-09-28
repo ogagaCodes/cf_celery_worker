@@ -134,7 +134,7 @@ def create_cloudformation_template(worker_count: int) -> str:
 
     return template.to_json()
 
-def deploy_cloudformation(template_body: str):
+def deploy_cloudformation(template_body: str, worker_count: int):
     # Create a CloudFormation client
     client = boto3.client(
         'cloudformation',
@@ -163,7 +163,7 @@ def create_and_deploy_cloudformation(worker_count: int):
     # Generate the CloudFormation template
     template_body = create_cloudformation_template(worker_count)
     
-    # Deploy the CloudFormation stack
-    response = deploy_cloudformation(template_body)
+    # Deploy the CloudFormation stack with worker_count
+    response = deploy_cloudformation(template_body, worker_count)
     
     return response
